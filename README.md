@@ -12,3 +12,4 @@ With this module we used a STM8 MCU as gateway to deal with sensor’s digital d
 
 We also breaked the serial pins just like the normal HC-SR04 module. The pins are not pre-soldered. 
 
+Product Link: https://www.smart-prototyping.com/Prototyping-Modules/zio/Zio-Ultrasonic-Distance-Sensor.html
