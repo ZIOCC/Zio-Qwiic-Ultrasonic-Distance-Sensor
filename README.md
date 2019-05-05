@@ -1,4 +1,4 @@
-# Zio Qwiic Ultrasonic Distance Sensor
+# Zio Qwiic Ultrasonic Distance Sensor (HC-SR04)
 
 ![](usd.png)
 
