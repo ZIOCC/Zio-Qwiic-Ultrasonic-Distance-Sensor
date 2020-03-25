@@ -9,8 +9,10 @@ uint8_t distance_H=0;
 uint8_t distance_L=0;
 uint16_t distance=0;
 
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
 #define OLED_RESET 4
-Adafruit_SSD1306 display(OLED_RESET);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 #if (SSD1306_LCDHEIGHT != 32)
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
@@ -19,7 +21,11 @@ Adafruit_SSD1306 display(OLED_RESET);
 void setup() {
   Wire.begin(); // join i2c bus (address optional for master)
   Serial.begin(9600);  // start serial for output
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
+  // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3C for 128x32
+    Serial.println(F("SSD1306 allocation failed"));
+    for(;;); // Don't proceed, loop forever
+  }
   Serial.println("IIC testing......");
   display.clearDisplay();
 //  Wire.beginTransmission(SLAVE_BROADCAST_ADDR); // transmit to device SLAVE_BROADCAST_ADDR
@@ -30,11 +36,11 @@ void setup() {
 
 
 void loop() {
-  Wire.beginTransmission(SLAVE_ADDR); // transmit to device #8
+  Wire.beginTransmission(SLAVE_ADDR); // transmit to device SLAVE_ADDR
   Wire.write(1);              // measure command: 0x01
   Wire.endTransmission();    // stop transmitting 
   
-  Wire.requestFrom(SLAVE_ADDR, 2);    // request 6 bytes from slave device #8
+  Wire.requestFrom(SLAVE_ADDR, 2);    // request 2 bytes from slave device SLAVE_ADDR
   while (Wire.available()) { // slave may send less than requested
   distance_H = Wire.read(); // receive a byte as character    
   distance_L = Wire.read();  
@@ -54,4 +60,3 @@ void loop() {
   delay(100);
  }
 }
-
