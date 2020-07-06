@@ -16,7 +16,7 @@ We also break the serial pins just like the normal HC-SR04 module. The pins are 
 
 For additional information on how the Ultrasonic sensor works, you can check out this [page](http://arduinoinfo.mywikis.net/wiki/UltraSonicDistance)!
 
-
+Note: Try to avoid touching the pins and pads on the backside, the sensor measurement is based on analog single, touching these pins and pads will make the result unstable. 
 
 #### Specification
 
