@@ -39,7 +39,7 @@ void loop() {
   Wire.beginTransmission(SLAVE_ADDR); // transmit to device SLAVE_ADDR
   Wire.write(1);              // measure command: 0x01
   Wire.endTransmission();    // stop transmitting 
-  
+  delay(5);
   Wire.requestFrom(SLAVE_ADDR, 2);    // request 2 bytes from slave device SLAVE_ADDR
   while (Wire.available()) { // slave may send less than requested
   distance_H = Wire.read(); // receive a byte as character    
